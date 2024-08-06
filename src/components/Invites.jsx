@@ -7,7 +7,7 @@ function Invites() {
   const notify = () => toast.success("Invite link copied!");
   const { user, invites } = useContext(DataContext);
   const copy = () => {
-    const url = `https://t.me/blum_azizbek_bot/PythonEngeneer?start=er_${user.telegram_id}`;
+    const url = `https://t.me/blum_azizbek_bot/start=er_${user.telegram_id}`;
 
     navigator.clipboard
       .writeText(url)
