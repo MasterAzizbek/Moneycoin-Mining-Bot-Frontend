@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
-
+@import url(https://fonts.googleapis.com/css?family=PT+Mono:regular);
 * {
   margin: 0;
   padding: 0;
@@ -16,6 +16,10 @@ body {
   margin: auto;
   height: 100vh;
   padding: 20px;
+}
+
+.App::-webkit-scrollbar {
+  width: 0;
 }
 
 .DailyReward {
@@ -149,6 +153,7 @@ body {
 .amount_title {
   font-size: 20px;
   color: #fff;
+  font-family: "PT Mono";
 }
 
 .Home {
@@ -236,4 +241,214 @@ body {
   font-weight: normal;
   position: absolute;
   right: 20px;
+}
+
+.tasks_title {
+  font-size: 25px;
+  color: #fff;
+  margin-bottom: 15px;
+  position: relative;
+  width: max-content;
+}
+.tasks_text {
+  font-size: 18px;
+  color: #e1e1e1;
+  line-height: 25px;
+  margin-bottom: 40px;
+}
+
+.Tasks img {
+  width: 100%;
+}
+
+.Tasks {
+  height: 100%;
+  overflow: auto;
+}
+
+.task_bottom {
+}
+
+.task_card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  border-bottom: 0.1px solid #e1e1e150;
+  padding-bottom: 10px;
+}
+.title_box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.task_card_title {
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 0.7px;
+  font-weight: 600;
+}
+.task_card_text {
+  font-size: 14px;
+  color: #e1e1e1;
+}
+
+.task_left i {
+  font-size: 35px;
+  color: #fff;
+}
+
+.task_left {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.task_card button {
+  padding: 7px 15px;
+  background-color: #272727;
+  border: none;
+  color: #fff;
+  border-radius: 30px;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: -25px;
+  font-size: 18px;
+}
+
+.btn_check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.Invites {
+  height: 100%;
+  position: relative;
+}
+
+.Invites img {
+  width: 70px;
+}
+.invites_top {
+  text-align: center;
+  padding-top: 30px;
+}
+.invite_title {
+  font-size: 20px;
+  color: #fff;
+  letter-spacing: 1px;
+  width: 90%;
+  margin: auto;
+  margin-top: 15px;
+  letter-spacing: 1px;
+  font-family: "PT Mono";
+}
+.invites_box {
+  height: 100%;
+  overflow: auto;
+}
+.works_box_top {
+}
+.works_title {
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-family: "PT Mono";
+}
+
+.invites_cards {
+  margin-bottom: 80px;
+}
+.works_box_bottom {
+}
+.works_bottom_left {
+}
+.works_bottom_right {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+.works_bottom_card {
+  text-align: start;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: #3d3c3c7e;
+}
+.works_card_title {
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 1px;
+  font-family: monospace;
+}
+.works_card_text {
+  font-size: 12px;
+  color: #e1e1e1;
+  font-family: "PT Mono";
+  margin-top: 5px;
+}
+.invite_button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  border: none;
+}
+
+.Wallet {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Wallet img {
+  width: 70px;
+}
+.wallet_text {
+  font-size: 16px;
+  color: #e1e1e1;
+  width: 90%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.Loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999999999;
+  opacity: 1;
+  transform: 1;
+}
+
+.Loader.active {
+  opacity: 0;
+  display: none;
+}
+
+.Loader img {
+  width: 200px;
 }

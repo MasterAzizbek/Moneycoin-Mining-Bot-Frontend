@@ -12,6 +12,7 @@ function Home() {
     setValue,
     check_blum,
     claim_hander,
+    ToastContainer,
   } = useContext(DataContext);
 
   const [minute, setMinute] = useState(0);
@@ -56,18 +57,26 @@ function Home() {
     return () => clearInterval(intervalId);
   }, []);
 
+  const formatNumber = (number) => {
+    return new Intl.NumberFormat().format(number);
+  };
+
   return (
     <div className="Home">
+      <ToastContainer />
       <img className="coin_img" src={`/coin.png`} alt="Coin" />
       <h4 className="blum_title">{blum.username}</h4>
       <div className="amount_box">
         <img src="/ssNSbVRV_400x400.jpg" alt="Amount" />
-        <h6 className="amount_title">{blum.count}</h6>
+        <h6 className="amount_title">{formatNumber(blum.count)}</h6>
       </div>
-      {hour < 8 ? (
+      {hour < 8 && blum.claim == false ? (
         <div className="increaser">
           <div className="increaser_box">
-            <div className="bg" style={{ width: `${hour * 12.5}%` }}></div>
+            <div
+              className="bg"
+              style={{ width: `${(8 - hour) * 12.5}%` }}
+            ></div>
             <h6>
               Farming <img src="/blum_logo.png" alt="" />
               {value.toFixed(3)}
@@ -80,9 +89,7 @@ function Home() {
           Claim
         </button>
       ) : (
-        <button onClick={() => start_farming()} className="start_farming">
-          Start Farming
-        </button>
+        ""
       )}
     </div>
   );

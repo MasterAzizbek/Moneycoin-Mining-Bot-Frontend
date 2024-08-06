@@ -1,18 +1,24 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DataContext = createContext({});
 
 const API_URL = "https://azizbekaliyev.uz/api/v1/authenticate";
 
 export const DataProvider = ({ children }) => {
+  const login = () => toast.success("Login successfully. Welcome!");
   const location = useLocation();
-  const urlparams = new URLSearchParams(location.search);
   const [user, setUser] = useState({});
   const [blum, setBlum] = useState({});
+  const [invites, setInvites] = useState([]);
   const [hour, setHour] = useState(0);
   const [value, setValue] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [isloading, setisloading] = useState(true);
+
+  const urlparams = new URLSearchParams(location.search);
   const id = urlparams.get("telegram_id");
   const uname = urlparams.get("username");
   const fname = urlparams.get("first_name");
@@ -41,14 +47,22 @@ export const DataProvider = ({ children }) => {
           avatar: av,
         }),
       });
+
       if (!response.ok) {
-        const errorText = await response.text(); // Read error text
+        const text = await response.text(); // Read response as text if not OK
         throw new Error(
-          `Authentication failed: ${response.statusText} - ${errorText}`
+          `HTTP error! Status: ${response.status}, Response: ${text}`
         );
       }
-      const data = await response.json();
-      setUser(data);
+
+      const contentType = response.headers.get("Content-Type");
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+        console.log(data);
+        setUser(data);
+      } else {
+        throw new Error(`Expected JSON, but received ${contentType}`);
+      }
     } catch (error) {
       console.error("Error authenticating:", error.message); // Log detailed error message
     }
@@ -79,13 +93,33 @@ export const DataProvider = ({ children }) => {
     }
   }, [user]);
 
+  const get_invites = async () => {
+    const response = await fetch(`${API_URL}/get_invites/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: id,
+      }),
+    });
+    const data = await response.json();
+    setInvites(data);
+    console.log(data);
+  };
+
   useEffect(() => {
     authenticate();
+    login();
+    get_invites();
   }, [authenticate]);
 
   useEffect(() => {
     if (user.telegram_id) {
       getBlum();
+      setTimeout(() => {
+        setisloading(false);
+      }, 3000);
     }
   }, [getBlum, user.telegram_id]);
 
@@ -163,6 +197,7 @@ export const DataProvider = ({ children }) => {
     await getBlum();
     await check_blum();
   };
+
   return (
     <DataContext.Provider
       value={{
@@ -181,6 +216,11 @@ export const DataProvider = ({ children }) => {
         check_blum,
         daily_reward_claimer,
         claim_hander,
+        getBlum,
+        login,
+        ToastContainer,
+        invites,
+        isloading,
       }}
     >
       {children}
