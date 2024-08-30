@@ -358,14 +358,17 @@ body {
   font-size: 20px;
   color: #fff;
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 30px;
   letter-spacing: 1px;
   font-family: "PT Mono";
 }
 
 .invites_cards {
   margin-bottom: 80px;
+}
+.invites_bottom {
+  margin-top: 30px;
 }
 .works_box_bottom {
 }
@@ -451,4 +454,28 @@ body {
 
 .Loader img {
   width: 200px;
+}
+
+.invite_card_right h6 {
+  font-size: 18px;
+  color: #fff;
+  font-family: monospace;
+}
+.invite_card_left {
+  padding: 10px;
+  background-color: #272727;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invite_card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: #27272767;
+  margin-bottom: 10px;
 }

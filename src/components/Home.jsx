@@ -13,6 +13,7 @@ function Home() {
     check_blum,
     claim_hander,
     ToastContainer,
+    first_name,
   } = useContext(DataContext);
 
   const [minute, setMinute] = useState(0);
@@ -65,7 +66,7 @@ function Home() {
     <div className="Home">
       <ToastContainer />
       <img className="coin_img" src={`/coin.png`} alt="Coin" />
-      <h4 className="blum_title">{blum.username}</h4>
+      <h4 className="blum_title">{first_name}</h4>
       <div className="amount_box">
         <img src="/ssNSbVRV_400x400.jpg" alt="Amount" />
         <h6 className="amount_title">{formatNumber(blum.count)}</h6>
@@ -78,7 +79,7 @@ function Home() {
               style={{ width: `${(8 - hour) * 12.5}%` }}
             ></div>
             <h6>
-              Farming <img src="/blum_logo.png" alt="" />
+              Farming <img src="/money.png" alt="" />
               {value.toFixed(3)}
               <span>{8 - hour}h</span>
             </h6>

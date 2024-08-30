@@ -17,6 +17,7 @@ export const DataProvider = ({ children }) => {
   const [value, setValue] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isloading, setisloading] = useState(true);
+  const [first_name, setfirstname] = useState("");
 
   const urlparams = new URLSearchParams(location.search);
   const id = urlparams.get("telegram_id");
@@ -58,7 +59,6 @@ export const DataProvider = ({ children }) => {
       const contentType = response.headers.get("Content-Type");
       if (contentType && contentType.includes("application/json")) {
         const data = await response.json();
-        console.log(data);
         setUser(data);
       } else {
         throw new Error(`Expected JSON, but received ${contentType}`);
@@ -79,6 +79,7 @@ export const DataProvider = ({ children }) => {
         }
         const data = await response.json();
         setBlum(data);
+        setfirstname(fname);
         // Update value based on the fetched data
         if (data.start_time) {
           const startDate = new Date(data.start_time);
@@ -105,13 +106,19 @@ export const DataProvider = ({ children }) => {
     });
     const data = await response.json();
     setInvites(data);
-    console.log(data);
+  };
+
+  const pooling = () => {
+    get_invites();
+
+    setInterval(get_invites, 5000);
   };
 
   useEffect(() => {
     authenticate();
     login();
     get_invites();
+    pooling();
   }, [authenticate]);
 
   useEffect(() => {
@@ -221,6 +228,7 @@ export const DataProvider = ({ children }) => {
         ToastContainer,
         invites,
         isloading,
+        first_name,
       }}
     >
       {children}

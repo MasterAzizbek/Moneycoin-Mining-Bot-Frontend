@@ -1,10 +1,24 @@
 import { useEffect, useState, useContext } from "react";
 import DataContext from "../context/context";
+import { toast } from "react-toastify";
 
 function Tasks() {
   const API_URL = "https://azizbekaliyev.uz/api/v1/authenticate";
   const [tasks, setTasks] = useState({});
   const { user, getBlum } = useContext(DataContext);
+
+  const success = (task_name, amount) => {
+    toast.success(
+      `Task "${task_name}" successfuly completed. Gift ${amount} MC`
+    );
+  };
+
+  const pooling = () => {
+    get_tasks();
+
+    setInterval(get_tasks, 5000);
+  };
+
   const get_tasks = async () => {
     try {
       const response = await fetch(`${API_URL}/get_tasks/`, {
@@ -45,11 +59,13 @@ function Tasks() {
 
     console.log(response.json());
     await getBlum();
+    isfinished();
   };
 
   useEffect(() => {
     get_tasks();
   }, [tasks, user]);
+
   return (
     <div className="Tasks">
       <div className="tasks_top">
@@ -77,7 +93,16 @@ function Tasks() {
                   <i class="bx bx-check-circle"></i>
                 </button>
               ) : (
-                <button onClick={() => handleStart(task.id, task.task_url)}>
+                <button
+                  onClick={() =>
+                    handleStart(
+                      task.id,
+                      task.task_url,
+                      task.task_name,
+                      task.task_prize_amount
+                    )
+                  }
+                >
                   Start
                 </button>
               )}

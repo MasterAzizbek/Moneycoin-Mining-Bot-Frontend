@@ -7,7 +7,7 @@ function Invites() {
   const notify = () => toast.success("Invite link copied!");
   const { user, invites } = useContext(DataContext);
   const copy = () => {
-    const url = `https://t.me/blum_azizbek_bot/start=er_${user.telegram_id}`;
+    const url = `https://t.me/blum_azizbek_bot?start=er_${user.telegram_id}`;
 
     navigator.clipboard
       .writeText(url)
@@ -59,11 +59,27 @@ function Invites() {
         <div className="invites_bottom">
           <h3 className="works_title">Frends</h3>
           <div className="invites_cards">
-            {invites.length != 0 ? (
+            {invites.length > 0 ? (
               invites.map((invite) => (
                 <div key={invite.id} className="invite_card">
-                  <h6>{invite.username}</h6>
-                  <span>{invite.amount}</span>
+                  <div className="invite_card_left">
+                    <i
+                      class="bx bx-user"
+                      style={{ color: "#fff", fontSize: "30px" }}
+                    ></i>
+                  </div>
+                  <div className="invite_card_right">
+                    <h6>{invite.first_name}</h6>
+                    <span
+                      style={{
+                        color: "#fff",
+                        fontSize: "12px",
+                        fontFamily: "PT Mono",
+                      }}
+                    >
+                      {invite.amount} MC
+                    </span>
+                  </div>
                 </div>
               ))
             ) : (
